@@ -28,7 +28,7 @@ Route::post('/contact', function (Request $request) {
         \Log::info('Contact form submission:', $validated);
 
         return response()->json([
-            'message' => 'Contact message received successfully! (Development mode)',
+            'message' => 'Contact message received successfully! (No Database)',
             'status' => 'success',
             'data' => $validated
         ], 200)
