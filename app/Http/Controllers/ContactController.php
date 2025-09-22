@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\ContactMessage;
 
 class ContactController extends Controller
 {
@@ -16,12 +17,13 @@ class ContactController extends Controller
                 'message' => 'required|string|max:1000',
             ]);
 
-            // Log the message instead of saving to database
-            Log::info('Contact form submission via controller:', $validated);
+            // Save to database
+            ContactMessage::create($validated);
+            Log::info('Contact form submission saved to database:', $validated);
 
             return response()->json([
                 'success' => true, 
-                'message' => 'Message received successfully! (No Database)',
+                'message' => 'Message saved to database successfully!',
                 'data' => $validated
             ], 200)
             ->header('Access-Control-Allow-Origin', '*')
@@ -29,11 +31,12 @@ class ContactController extends Controller
             ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With');
         
         } catch (\Exception $e) {
-            Log::error('Contact form controller error: ' . $e->getMessage());
+            Log::error('Contact form database error: ' . $e->getMessage());
             
+            // Fallback - still return success but log the error
             return response()->json([
                 'success' => true,
-                'message' => 'Message processed successfully!'
+                'message' => 'Message received! (Database connection issue)'
             ], 200)
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
