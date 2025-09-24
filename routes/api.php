@@ -100,22 +100,12 @@ Route::get('/skills', function () {
 // Get experience/about information
 Route::get('/about', function () {
     return response()->json([
-        'about' => 'I am a motivated web developer from Pakistan, currently studying Computer Science at COMSATS University Islamabad, Sahiwal Campus.',
+        'about' => 'I am a passionate full-stack developer and Computer Science student at COMSATS University Islamabad, dedicated to crafting innovative digital solutions that make a meaningful impact. With a strong foundation in modern web technologies, I specialize in building scalable, user-centric applications using cutting-edge frameworks like Laravel, PHP, and modern JavaScript. My approach combines technical expertise with creative problem-solving, focusing on clean code architecture, responsive design principles, and seamless user experiences.',
         'education' => [
             [
-                'institution' => 'COMSATS University Islamabad, Sahiwal Campus',
+                'institution' => 'COMSATS University Islamabad',
                 'degree' => 'BS Computer Science (Ongoing)',
                 'status' => 'Currently Enrolled'
-            ]
-        ],
-        'achievements' => [
-            [
-                'title' => 'Matriculation',
-                'score' => '648 / 850'
-            ],
-            [
-                'title' => 'Intermediate (FSc)',
-                'score' => '997 / 1100'
             ]
         ]
     ])
